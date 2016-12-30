@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html lang="en">
+    <body>
+        <script src="elm.js"></script>
+        <script>
+            const elm = Elm.Main.fullscreen();
+            elm.ports.portA.subscribe((number) => {
+                console.log("Event [" + number + "] received through portA")
+            });
+            elm.ports.portB.subscribe((number) => {
+                console.log("Event [" + number + "] received through portB")
+            });
+        </script>
+    </body>
+</html>
