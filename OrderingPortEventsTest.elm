@@ -1,8 +1,6 @@
 port module Main exposing (..)
 import Html exposing (..)
 import Html.Attributes exposing (..)
-import Process
-import Task
 
 type alias Model =
   {}
