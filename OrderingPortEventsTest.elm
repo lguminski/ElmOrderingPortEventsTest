@@ -1,18 +1,16 @@
 port module Main exposing (..)
 import Html exposing (..)
 import Html.Attributes exposing (..)
+import Process
+import Task
 
 type alias Model =
   {}
 
 type Msg
   = NoOp
+  | Test ()
 
-update : Msg -> Model -> ( Model, Cmd Msg )
-update msg model =
-  case msg of
-    NoOp ->
-      model ! []
 
 main =
   Html.program
@@ -28,11 +26,22 @@ view model =
 
 subscriptions : Model -> Sub Msg
 subscriptions model =
-  Sub.batch []
+  Sub.batch [ triggerTest Test ]
 
 port portA : Int -> Cmd msg
 port portB : Int -> Cmd msg
+port triggerTest : (() -> msg) -> Sub msg
 
 init : ( Model, Cmd Msg )
 init =
-  {} ! [ portA 5, portA 4, portB 3, portB 2, portA 1 ]
+  {} ! []
+
+update : Msg -> Model -> ( Model, Cmd Msg )
+update msg model =
+  case msg of
+
+    NoOp ->
+      model ! []
+
+    Test _ ->
+      model ! [ portA 5, portA 4, portB 3, portB 2, portA 1 ]

@@ -10,6 +10,7 @@
             elm.ports.portB.subscribe((number) => {
                 console.log("Event [" + number + "] received through portB")
             });
+            elm.ports.triggerTest.send(null);
         </script>
     </body>
 </html>
